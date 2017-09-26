@@ -40,19 +40,13 @@ export default (state = initialState, action) => {
             let errorMessage = 'Erro desconhecido'
             switch ( action.payload.code ) {
                 case 'auth/user-not-found':
-                    errorMessage = 'Usuário não existe.'
+                    errorMessage = 'User not found.'
                     break
                 case 'auth/invalid-email':
-                    errorMessage = 'E-mail inválido.'
+                    errorMessage = 'Invalid e-mail.'
                     break
                 case 'auth/wrong-password':
-                    errorMessage = 'Usuário ou senha inválidos.'
-                    break
-                case 'auth/wrong-role':
-                    errorMessage = 'Usuário não está autorizado a acessar o painel web.'
-                    break
-                case 'auth/invalid-token':
-                    errorMessage = 'O token não é válido.'
+                    errorMessage = 'Wrong user or password.'
                     break
             }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {TextField, FlatButton} from 'material-ui'
+import {TextField, FlatButton, Dialog} from 'material-ui'
 import {doLogin} from '../../../actions/login'
 
 class Login extends Component {
@@ -17,7 +17,23 @@ class Login extends Component {
 
     this.state = {
       emailText    : '',
-      passwordText : ''
+      passwordText : '',
+      alert        : {
+        show  : false,
+        title : null
+      }
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.errorMessage) {
+      this.setState( state => ({
+        ...state, 
+        alert: {
+          show  : true,
+          title : nextProps.errorMessage
+        }
+      }) )
     }
   }
 
@@ -39,30 +55,54 @@ class Login extends Component {
     this.setState( state => ({...state, passwordText: pass}) )
   }
 
+  onDismissDialog = () => {
+    this.setState( state => ({
+      ...state, 
+      alert: {
+        show  : false,
+        title : null
+      }
+    }) )
+  }
+
   /**
    * Render
    */
 
   render() {
+    const dialogActions = [
+      <FlatButton
+        label="OK"
+        onClick={this.onDismissDialog}
+      />
+    ]
+
     return (
-      <form onSubmit={this.bindedOnLoginClick}>
-        <TextField 
-          value={this.state.emailText}
-          onChange={this.bindedHandleEmailTyped}
-          hintText="E-mail"
-          type="e-mail"
+      <div>
+        <form onSubmit={this.bindedOnLoginClick}>
+          <TextField 
+            value={this.state.emailText}
+            onChange={this.bindedHandleEmailTyped}
+            hintText="E-mail"
+            type="e-mail"
+          />
+          <TextField 
+            value={this.state.passwordText}
+            onChange={this.bindedHandlePasswordTyped}
+            hintText="Password"
+            type="password"
+          />
+          <FlatButton
+            label="Enter"
+            onClick={ this.bindedOnLoginClick }
+          />
+        </form>
+        <Dialog
+          open={this.state.alert.show}
+          title={this.state.alert.title}
+          actions={dialogActions}
         />
-        <TextField 
-          value={this.state.passwordText}
-          onChange={this.bindedHandlePasswordTyped}
-          hintText="Password"
-          type="password"
-        />
-        <FlatButton
-          label="Enter"
-          onClick={ this.bindedOnLoginClick }
-        />
-      </form>
+      </div>
     )
   }
 }
@@ -73,6 +113,7 @@ class Login extends Component {
 
 const mapStateToProps = state => ({
   isLoading       : state.login.isLoading,
+  errorMessage    : state.login.errorMessage
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
