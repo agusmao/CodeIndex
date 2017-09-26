@@ -94,31 +94,31 @@ class ScriptDetailsModal extends Component {
           onRequestClose={this.bindedHandleClose}
         >
           <TextField 
-            ref={(input) => { this.titleInput = input.input }}
+            ref={(input) => { if (input) this.titleInput = input.input }}
             textareaStyle={{backgroundColor: '#EEE'}}
             fullWidth={true}
             floatingLabelText="Title"
           />
           <TextField 
-            ref={(input) => { this.descriptionInput = input.input }}
+            ref={(input) => { if (input) this.descriptionInput = input.input }}
             textareaStyle={{backgroundColor: '#EEE'}}
             fullWidth={true}
             floatingLabelText="Description"
           />
           <TextField 
-            ref={(input) => { this.tagsInput = input.input }}
+            ref={(input) => { if (input) this.tagsInput = input.input }}
             textareaStyle={{backgroundColor: '#EEE'}}
             fullWidth={true}
             floatingLabelText="Tags"
           />
           <TextField 
-            ref={(input) => { this.languageInput = input.input }}
+            ref={(input) => { if (input) this.languageInput = input.input }}
             textareaStyle={{backgroundColor: '#EEE'}}
             fullWidth={true}
             floatingLabelText="Language"
           />
           <TextField 
-            ref={(input) => { this.codeInput = input.input.refs.input }}
+            ref={(input) => { if (input) this.codeInput = input.input.refs.input }}
             textareaStyle={{backgroundColor: '#EEE'}}
             fullWidth={true}
             multiLine={true}
