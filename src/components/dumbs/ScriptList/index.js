@@ -48,6 +48,7 @@ class ScriptList extends Component {
     return (
       <div className="col" style={{
         flex: '1 1 auto',
+        'overflow-x': 'hidden',
         'overflow-y': 'auto',
         'min-height': '400px'
         }}>

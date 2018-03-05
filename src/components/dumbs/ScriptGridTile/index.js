@@ -72,7 +72,7 @@ class ScriptGridTile extends Component {
 
   render() {
     return (
-      <div style={{backgroundColor: this.state.backgroundColor}} 
+      <div style={{backgroundColor: this.state.backgroundColor, padding: '16px', width: '100%'}} 
         onMouseOver={ ev => { this.onHover()}} 
         onMouseLeave={ ev => { this.onMouseLeave()}} 
         onClick={ ev => { this.onSelected() } }
